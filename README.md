@@ -9,58 +9,67 @@
 
 ## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Currently, the number distribution is fixed for theory/lab courses. The aim of this project
+is to make it dynamic.
+- Admin will create courses, teachers, sections, and session etc
+- Teacher, after being assigned to a particular course, can fix the mark distribution
+- Marks will be given accordingly
+- Results will be calculated accordingly
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+--- 
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Project Details
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### User Management/Registration/Login
+- There will be 4 types of users: Super Admin, Department Admin, Teacher, Student
+- Students and Teachers will be registered
+- Super Admin user will be manually added (using query or interface) to the system
+- If admin creates teachers and students, then they will be automatically approved. But if
+the students and teachers are registered by themselves, then approval from Admin is
+required
+- Admin can also create other users with Admin role
+- The system will have a single login page. Once login, the information of the logged-in
+user will be saved in the session### User Management/Registration/Login
+- There will be 4 types of users: Super Admin, Department Admin, Teacher, Student
+- Students and Teachers will be registered
+- Super Admin user will be manually added (using query or interface) to the system
+- If admin creates teachers and students, then they will be automatically approved. But if
+the students and teachers are registered by themselves, then approval from Admin is
+required
+- Admin can also create other users with Admin role
+- The system will have a single login page. Once login, the information of the logged-in
+user will be saved in the session
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Security
+- Each type of user will perform separate activities. So proper authorization should be
+maintained according to the user’s role
+- Password should be encrypted. Software should not contain duplicate values for the email
+or user id/roll/phone number etc.
 
-## Laravel Sponsors
+### Functionalities of Super Admin
+- Will create departments
+- Will create admin user for each department
+- Can create students and teachers for departments
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Functionalities of Admin (Department)
+- Create both students and teachers
+- CRUD courses, CRUD session. Also, can change the status of session
+- For a session, will create the offers (create section/sections for course and assign
+teachers)
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Functionalities of Student
+- Can register to the system
+- Will enroll the courses to a specific section for a specific session
+- Can submit the group members information and details of project idea
+- View the status of the project idea. If modification needed, will edit the idea and resubmit
+it
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Functionalities of Course Teacher
+- Will view the running courses (session wise)
+- Will change/fix/create the distribution of course
+- All the students under that course will be given marks according to the number
+distribution
