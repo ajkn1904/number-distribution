@@ -21,7 +21,6 @@ is to make it dynamic.
 
 
 # Project Details
-
 ---
 
 ### User Management/Registration/Login
