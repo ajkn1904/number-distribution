@@ -12,12 +12,4 @@ class AdminLayoutController extends Controller
     public function tables(){
         return view('SuperAdmin.pages.tables');
     }
-
-    public function login(){
-        return view('SuperAdmin.pages.login');
-    }
-
-    public function registration(){
-        return view('SuperAdmin.pages.registration');
-    }
 }

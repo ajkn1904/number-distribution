@@ -1,4 +1,4 @@
-@extends('SuperAdmin.layouts.single_col')
+@extends('sitelayouts.layouts.single_col')
 
 @section('contents')
 <div class="col-lg-7">

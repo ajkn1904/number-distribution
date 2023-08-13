@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About The Project
 
 Currently, the number distribution is fixed for theory/lab courses. The aim of this project
 is to make it dynamic.
@@ -20,7 +20,8 @@ is to make it dynamic.
 --- 
 
 
-## Project Details
+# Project Details
+
 ---
 
 ### User Management/Registration/Login

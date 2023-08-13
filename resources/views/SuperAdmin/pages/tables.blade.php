@@ -1,4 +1,4 @@
-@extends('SuperAdmin.layouts.two_col')
+@extends('sitelayouts.layouts.two_col')
 @section('main-contents')
 <div class="container-fluid px-4">
     <h1 class="mt-4">Tables</h1>

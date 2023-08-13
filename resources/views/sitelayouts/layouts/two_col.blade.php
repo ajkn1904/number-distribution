@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-    @include('SuperAdmin.includes.head')
+    @include('sitelayouts.includes.head')
 </head>
 
 <body class="sb-nav-fixed">
 
 
-    @include('SuperAdmin.includes.nav')
+    @include('sitelayouts.includes.nav')
 
 
     <div id="layoutSidenav">
 
-        @include('SuperAdmin.includes.sidebar')
+        @include('sitelayouts.includes.sidebar')
 
 
         <div id="layoutSidenav_content">
@@ -22,7 +22,7 @@
             </main>
 
 
-            @include('SuperAdmin.includes.footer')
+            @include('sitelayouts.includes.footer')
 
 
         </div>
@@ -31,6 +31,6 @@
 </body>
 
 
-@include('SuperAdmin.includes.scripts')
+@include('sitelayouts.includes.scripts')
 
 </html>

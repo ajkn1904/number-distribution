@@ -43,6 +43,29 @@
                                 <a class="nav-link" href="password.html">Forgot Password</a>
                             </nav>
                         </div>
+
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseUserWisePages" aria-expanded="false"
+                            aria-controls="pagesCollapseUserWisePages">
+                            Other Pages
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseUserWisePages" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+                                @if(Session::has('user_role') && Session::get('user_role')=='SuperAdmin')
+                                <a class="nav-link" href="{{url('/pending-users')}}">Pending</a>
+                                @endif
+
+
+                                <a class="nav-link" href="{{url('')}}">Courses</a>
+                                <a class="nav-link" href="{{url('')}}">Departments</a>
+                            </nav>
+                        </div>
+
+
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#pagesCollapseError" aria-expanded="false"
                             aria-controls="pagesCollapseError">
