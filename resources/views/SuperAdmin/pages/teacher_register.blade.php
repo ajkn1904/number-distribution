@@ -59,9 +59,9 @@
                 <div class="form-group">
                     <select name="department" id="" class="form-control">
                         <option value="">Select Department</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Economics">Economics</option>
-                        <option value="Finance">Finance</option>
+                        @foreach($departments as $d)
+                        <option value="{{$d->name}}">{{$d->name}}</option>
+                        @endforeach
                     </select>
                 </div>
 

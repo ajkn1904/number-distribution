@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use App\Models\Department;
 
 class AuthController extends Controller
 {
@@ -58,7 +59,8 @@ class AuthController extends Controller
     //registration part for teacher
     public function teacherRegister()
     {
-        return view('SuperAdmin.pages.teacher_register');
+        $departments = Department::all();
+        return view('SuperAdmin.pages.teacher_register', compact('departments'));
     }
     public function registrationTeacher(Request $req)
     {
@@ -95,7 +97,8 @@ class AuthController extends Controller
     //registration part for student
     public function studentRegister()
     {
-        return view('SuperAdmin.pages.student_register');
+        $departments = Department::all();
+          return view('SuperAdmin.pages.student_register', compact('departments'));
     }
 
 
@@ -163,4 +166,84 @@ class AuthController extends Controller
         }
 
     }
+
+
+
+
+
+      //create teacher by Super Admin
+      public function createTeacher()
+      {
+          $departments = Department::all();
+          return view('SuperAdmin.pages.teacher.create', compact('departments'));
+      }
+      public function teacherCreate(Request $req)
+      {
+          if($req->password == $req->conf_password) {
+              // Check if the submitted email is already in the User table or database
+              //checking existing data on database using where()
+              $user_exists =  User::where('email', '=', $req->email)->first();
+              if($user_exists) {
+                  return redirect()->back()->with('error', 'Email Already Exists!');
+              } else {
+                  $user = new User();
+                  $user->first_name = $req->first_name;
+                  $user->last_name = $req->last_name;
+                  $user->email = $req->email;
+                  $user->teacher_id = $req->roll;
+                  $user->department = $req->department;
+                  /* md5 to encrypt password */
+                  $user->password = md5($req->password);
+                  $user->role = 'Teacher';
+                  $user->status = true;
+                  if($user->save()) {
+                      return redirect()->back()->with('success', 'Teacher Registered');
+                  }
+  
+              }
+  
+          } else {
+              return redirect()->back()->with('error', 'Password Mismatch!');
+          }
+  
+      }
+
+
+
+      //create student by Super Admin
+      public function createStudent()
+      {
+          $departments = Department::all();
+          return view('SuperAdmin.pages.student.create', compact('departments'));
+      }
+      public function studentCreate(Request $req)
+      {
+          if($req->password == $req->conf_password) {
+              // Check if the submitted email is already in the User table or database
+              //checking existing data on database using where()
+              $user_exists =  User::where('email', '=', $req->email)->first();
+              if($user_exists) {
+                  return redirect()->back()->with('error', 'Email Already Exists!');
+              } else {
+                  $user = new User();
+                  $user->first_name = $req->first_name;
+                  $user->last_name = $req->last_name;
+                  $user->email = $req->email;
+                  $user->student_id = $req->roll;
+                  $user->department = $req->department;
+                  /* md5 to encrypt password */
+                  $user->password = md5($req->password);
+                  $user->role = 'Student';
+                  $user->status = true;
+                  if($user->save()) {
+                      return redirect()->back()->with('success', 'Student Registered');
+                  }
+  
+              }
+  
+          } else {
+              return redirect()->back()->with('error', 'Password Mismatch!');
+          }
+  
+      }
 }

@@ -6,7 +6,8 @@
     <h1 class="h3 mb-2 text-gray-800">Pending Users</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Pending Users</li>
+        <li class="breadcrumb-item active">All</li>
+        <li class="breadcrumb-item"><a href="{{url('/student/create')}}">Create Student</a></li>
     </ol>
 
     <!-- DataTales Example -->
@@ -19,25 +20,18 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Department</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($pending_users as $u)
+                        @foreach($students as $s)
                         <tr>
-                            <td>{{ $u->first_name}} {{ $u->last_name }}</td>
-                            <td>{{ $u->email }}</td>
+                            <td>{{ $s->first_name}} {{ $s->last_name }}</td>
+                            <td>{{ $s->email }}</td>
                             <td>
-                                @if($u->status)
-                                <span class="badge bg-success">Approved</span>
-                                @else
-                                <span class="badge bg-danger">Not Approved</span>
-                                @endif
+                                {{ $s->department }}
                             </td>
-                            <td>
-                                <a class="btn btn-sm btn-primary" href="{{ url('/approve-user/'.$u->id) }}">Approve</a>
-                            </td>
+
                         </tr>
 
                         @endforeach

@@ -44,6 +44,107 @@
                             </nav>
                         </div>
 
+                        @if(Session::has('user_role') && Session::get('user_role')=='SuperAdmin')
+                        <!-- department -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseDepartments" aria-expanded="false"
+                            aria-controls="pagesCollapseDepartments">
+                            Departments
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseDepartments" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+                                <a class="nav-link" href="{{url('/department/create')}}">Create Department</a>
+                                <a class="nav-link" href="{{url('/department/all')}}">All Departments</a>
+
+                            </nav>
+                        </div>
+
+
+                        <!-- teachers & admin -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseTeachers" aria-expanded="false"
+                            aria-controls="pagesCollapseTeachers">
+                            Teachers
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseTeachers" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+                                <a class="nav-link" href="{{url('/teacher/all_teachers')}}">All Teachers</a>
+                                <a class="nav-link" href="{{url('/teacher/create')}}">Create Teachers</a>
+
+                            </nav>
+                        </div>
+
+                        <!-- students -->
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseStudents" aria-expanded="false"
+                            aria-controls="pagesCollapseStudents">
+                            Students
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseStudents" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+
+                                <a class="nav-link" href="{{url('/student/all_students')}}">All Students</a>
+                                <a class="nav-link" href="{{url('/student/create')}}">Create Students</a>
+
+
+                            </nav>
+                        </div>
+
+                        @endif
+
+
+
+
+                        @if(Session::has('user_role') && (Session::get('user_role') == 'Admin'))
+                        <!-- teachers & admin -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseTeachers" aria-expanded="false"
+                            aria-controls="pagesCollapseTeachers">
+                            Teachers
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseTeachers" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+                                <a class="nav-link" href="{{url('/teacher/all_teachers')}}">All Teachers</a>
+                                <a class="nav-link" href="{{url('/teacher/create')}}">Create Teachers</a>
+
+                            </nav>
+                        </div>
+
+                        <!-- students -->
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseStudents" aria-expanded="false"
+                            aria-controls="pagesCollapseStudents">
+                            Students
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseStudents" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+
+                                <a class="nav-link" href="{{url('/student/all_students')}}">All Students</a>
+                                <a class="nav-link" href="{{url('/student/create')}}">Create Students</a>
+
+
+                            </nav>
+                        </div>
+
+                        @endif
+
 
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#pagesCollapseUserWisePages" aria-expanded="false"
@@ -61,7 +162,7 @@
 
 
                                 <a class="nav-link" href="{{url('')}}">Courses</a>
-                                <a class="nav-link" href="{{url('')}}">Departments</a>
+
                             </nav>
                         </div>
 

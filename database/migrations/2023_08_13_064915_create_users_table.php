@@ -22,6 +22,9 @@ return new class extends Migration
 
             $table->string('password', 100)->nullable();
             
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments');
+            
             $table->string('department', 100)->nullable();
             
             $table->string('role', 30);
