@@ -7,7 +7,10 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
         <li class="breadcrumb-item active">All</li>
-        <li class="breadcrumb-item"><a href="{{url('/teacher/create')}}">Create Teacher</a></li>
+        <li class="breadcrumb-item"><a @if(Session::has('user_role') && (Session::get('user_role')=='SuperAdmin' ))
+                href="{{url('/teacher/create')}}" @elseif(Session::has('user_role') &&
+                (Session::get('user_role')=='Admin' )) href="{{url('/teacher/department-create')}}" @endif>Create
+                Teacher</a></li>
     </ol>
 
     @if(Session::has('success'))
@@ -42,6 +45,8 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        @if(Session::has('user_role') && (Session::get('user_role')=='SuperAdmin' ))
                         @foreach($teachers as $t)
                         <tr>
                             <td>{{ $t->first_name}} {{ $t->last_name }}</td>
@@ -58,8 +63,6 @@
                                 @endif
                             </td>
 
-                            @if(Session::has('user_role') && Session::get('user_role')=='SuperAdmin')
-
                             <td>
                                 @if($t->role== 'Admin')
                                 <a class="btn btn-sm btn-secondary disabled"
@@ -69,12 +72,29 @@
                                 <a class="btn btn-sm btn-primary" href="{{ url('/make-admin/'.$t->id) }}">Make Admin</a>
                                 @endif
                             </td>
-                            @endif
-
-
                         </tr>
                         @endforeach
 
+
+                        @elseif(Session::has('user_role') && (Session::get('user_role')=='Admin' ))
+                        @foreach($sameDepartmentTeachers as $t)
+                        <tr>
+                            <td>{{ $t->first_name}} {{ $t->last_name }}</td>
+                            <td>{{ $t->email }}</td>
+                            <td>
+                                {{ $t->department }}
+                            </td>
+
+                            <td>
+                                @if($t->role== 'Admin')
+                                <span class="badge bg-success">Admin</span>
+                                @else
+                                <span class="badge bg-primary">Teacher</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

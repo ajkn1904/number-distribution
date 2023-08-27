@@ -4,7 +4,10 @@
     <h1 class="mt-4">Tables</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{url('/student/all_students')}}">All</a></li>
+        <li class="breadcrumb-item"><a @if(Session::has('user_role') && (Session::get('user_role')=='SuperAdmin' ))
+                href="{{url('/student/all_students')}}" @elseif(Session::has('user_role') &&
+                (Session::get('user_role')=='Admin' )) href="{{url('/student/all-department-students')}}" @endif>All</a>
+        </li>
         <li class="breadcrumb-item active">Create Student</li>
     </ol>
 
@@ -37,12 +40,11 @@
 
 
             </div>
-            <form class="user" method="post" action="{{ url('/student/creation') }}">
+            <form class="user" method="post" @if(Session::has('user_role') && (Session::get('user_role')=='SuperAdmin'
+                ))action="{{ url('/student/creation') }} " @elseif(Session::has('user_role') &&
+                (Session::get('user_role')=='Admin' ))action="{{ url('/student/department-creation') }} " @endif>
                 @csrf
                 <div class="form-group row">
-
-
-
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" name="first_name"
                             id="exampleFirstName" placeholder="First Name">
@@ -52,6 +54,8 @@
                             placeholder="Last Name">
                     </div>
                 </div>
+
+
                 <div class="form-group row my-2">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail"
@@ -68,9 +72,20 @@
                 <div class="form-group">
                     <select name="department" id="" class="form-control">
                         <option value="">Select Department</option>
+
+
+                        @if(Session::has('user_role') && Session::get('user_role') == 'SuperAdmin')
                         @foreach($departments as $d)
-                        <option value="{{$d->name}}">{{$d->name}}</option>
+                        <option value="{{ $d->name }}">{{ $d->name }}</option>
                         @endforeach
+
+                        @elseif(Session::has('user_role') && Session::get('user_role') == 'Admin')
+                        @if($user_department)
+                        <option value="{{ $user_department->name }}">{{ $user_department->name }}</option>
+                        @endif
+                        @endif
+
+
                     </select>
                 </div>
 

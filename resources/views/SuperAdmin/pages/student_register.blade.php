@@ -31,9 +31,6 @@
             <form class="user" method="post" action="{{ url('/student-registration') }}">
                 @csrf
                 <div class="form-group row">
-
-
-
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" name="first_name"
                             id="exampleFirstName" placeholder="First Name">

@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminLayoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DepartmentSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,20 +52,53 @@ Route::middleware(['checkLogin'])->group(function () {
     //Route::get('/pending-users', [UserController::class, 'pendingUsers']);
 
 
+    Route::middleware(['checkIfSuperAdminOrAdmin'])->group(function () {
+
+    });
+
+
     Route::middleware(['checkIfAdmin'])->group(function () {
         //teacher
-        Route::get('/teacher/create', [AuthController::class, 'createTeacher']);
-        Route::post('/teacher/creation', [AuthController::class, 'teacherCreate']);
+        Route::get('/teacher/department-create', [AuthController::class, 'createDepartmentTeacher']);
+        Route::post('/teacher/department-creation', [AuthController::class, 'teacherDepartmentCreate']);
 
-        Route::get('/teacher/all_teachers', [UserController::class, 'allTeacher']);
+        Route::get('/teacher/all-department-teachers', [UserController::class, 'allDepartmentTeacher']);
 
 
 
         //student
-        Route::get('/student/create', [AuthController::class, 'createStudent']);
-        Route::post('/student/creation', [AuthController::class, 'studentCreate']);
-        Route::get('/student/all_students', [UserController::class, 'allStudents']);
-    });    
+        Route::get('/student/department-create', [AuthController::class, 'createDepartmentStudent']);
+        Route::post('/student/department-creation', [AuthController::class, 'studentDepartmentCreate']);
+        Route::get('/student/all-department-students', [UserController::class, 'allDepartmentStudents']);
+
+
+        //course
+        Route::get('/courses/create', [CourseController::class, 'createCourses']);
+        Route::post('/courses/creation', [CourseController::class, 'coursesCreate']);
+        Route::get('/courses/all-courses', [CourseController::class, 'allCourses']);
+        //update course
+        Route::get('/courses/edit/{id}', [CourseController::class, 'edit']);
+        Route::post('/courses/update/{id}', [CourseController::class, 'update']);
+
+        //delete course
+        Route::get('/courses/delete/{id}', [CourseController::class, 'courseDelete']);
+
+         //session
+         Route::get('/session/create', [DepartmentSessionController::class, 'createSessions']);
+         Route::post('/session/creation', [DepartmentSessionController::class, 'sessionsCreate']);
+         Route::get('/session/all-session', [DepartmentSessionController::class, 'allSessions']);
+         //update session
+         Route::get('/session/edit/{id}', [DepartmentSessionController::class, 'edit']);
+         Route::post('/session/update/{id}', [DepartmentSessionController::class, 'update']);
+         
+         //update status
+         Route::get('/session/expire/{id}', [DepartmentSessionController::class, 'expire']);
+         Route::get('/session/running/{id}', [DepartmentSessionController::class, 'running']);
+
+         //delete session
+         Route::get('/session/delete/{id}', [DepartmentSessionController::class, 'sessionDelete']);
+
+    });
 
 
     Route::middleware(['checkIfSuperAdmin'])->group(function () {
@@ -96,7 +131,7 @@ Route::middleware(['checkLogin'])->group(function () {
     });
 
 
-    
+
 
 
 });
