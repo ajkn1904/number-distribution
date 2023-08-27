@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentSessionController;
+use App\Http\Controllers\TheSectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,20 +84,32 @@ Route::middleware(['checkLogin'])->group(function () {
         //delete course
         Route::get('/courses/delete/{id}', [CourseController::class, 'courseDelete']);
 
-         //session
-         Route::get('/session/create', [DepartmentSessionController::class, 'createSessions']);
-         Route::post('/session/creation', [DepartmentSessionController::class, 'sessionsCreate']);
-         Route::get('/session/all-session', [DepartmentSessionController::class, 'allSessions']);
-         //update session
-         Route::get('/session/edit/{id}', [DepartmentSessionController::class, 'edit']);
-         Route::post('/session/update/{id}', [DepartmentSessionController::class, 'update']);
-         
-         //update status
-         Route::get('/session/expire/{id}', [DepartmentSessionController::class, 'expire']);
-         Route::get('/session/running/{id}', [DepartmentSessionController::class, 'running']);
+        //session
+        Route::get('/session/create', [DepartmentSessionController::class, 'createSessions']);
+        Route::post('/session/creation', [DepartmentSessionController::class, 'sessionsCreate']);
+        Route::get('/session/all-session', [DepartmentSessionController::class, 'allSessions']);
+        //update session
+        Route::get('/session/edit/{id}', [DepartmentSessionController::class, 'edit']);
+        Route::post('/session/update/{id}', [DepartmentSessionController::class, 'update']);
 
-         //delete session
-         Route::get('/session/delete/{id}', [DepartmentSessionController::class, 'sessionDelete']);
+        //update status
+        Route::get('/session/expire/{id}', [DepartmentSessionController::class, 'expire']);
+        Route::get('/session/running/{id}', [DepartmentSessionController::class, 'running']);
+
+        //delete session
+        Route::get('/session/delete/{id}', [DepartmentSessionController::class, 'sessionDelete']);
+
+
+
+        //section
+        Route::get('/section/create', [TheSectionController::class, 'createSection']);
+        Route::post('/section/creation', [TheSectionController::class, 'sectionCreate']);
+        Route::get('/section/all-section', [TheSectionController::class, 'allSection']);
+        
+        //assign teacher
+        Route::get('/section/assign/{id}', [TheSectionController::class, 'assignTeacher']);
+        Route::post('/section/update/{id}', [TheSectionController::class, 'courseTeacher']);
+
 
     });
 

@@ -11,6 +11,7 @@
 
 Currently, the number distribution is fixed for theory/lab courses. The aim of this project
 is to make it dynamic.
+
 - Admin will create courses, teachers, sections, and session etc
 - Teacher, after being assigned to a particular course, can fix the mark distribution
 - Marks will be given accordingly
@@ -64,9 +65,6 @@ teachers)
 ### Functionalities of Student
 - Can register to the system
 - Will enroll the courses to a specific section for a specific session
-- Can submit the group members information and details of project idea
-- View the status of the project idea. If modification needed, will edit the idea and resubmit
-it
 
 ### Functionalities of Course Teacher
 - Will view the running courses (session wise)

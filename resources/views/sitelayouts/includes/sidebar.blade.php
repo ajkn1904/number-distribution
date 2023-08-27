@@ -27,6 +27,12 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <!-- <a class="nav-link" href="{{url('/login')}}">Login</a>
                                 <a class="nav-link" href="{{url('/registration')}}">Register</a> -->
+
+                                @if(Session::has('user_role') && Session::get('user_role')=='SuperAdmin')
+                                <a class="nav-link" href="{{url('/pending-users')}}">Pending User</a>
+                                @endif
+
+
                                 <a class="nav-link" href="password.html">Forgot Password</a>
                             </nav>
                         </div>
@@ -111,7 +117,6 @@
                         </div>
 
                         <!-- students -->
-
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#pagesCollapseStudents" aria-expanded="false"
                             aria-controls="pagesCollapseStudents">
@@ -164,6 +169,26 @@
 
                                 <a class="nav-link" href="{{url('/session/all-session')}}">All</a>
                                 <a class="nav-link" href="{{url('/session/create')}}">Create</a>
+
+
+                            </nav>
+                        </div>
+
+
+                        <!-- section -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseSection" aria-expanded="false"
+                            aria-controls="pagesCollapseSection">
+                            Section
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseSection" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+
+                                <a class="nav-link" href="{{url('/section/all-section')}}">All</a>
+                                <a class="nav-link" href="{{url('/section/create')}}">Create</a>
 
 
                             </nav>
