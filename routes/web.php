@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentSessionController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\TheSectionController;
 
 /*
@@ -105,11 +106,14 @@ Route::middleware(['checkLogin'])->group(function () {
         Route::get('/section/create', [TheSectionController::class, 'createSection']);
         Route::post('/section/creation', [TheSectionController::class, 'sectionCreate']);
         Route::get('/section/all-section', [TheSectionController::class, 'allSection']);
-        
+
         //assign teacher
         Route::get('/section/assign/{id}', [TheSectionController::class, 'assignTeacher']);
         Route::post('/section/update/{id}', [TheSectionController::class, 'courseTeacher']);
 
+
+        //delete section
+        Route::get('/section/delete/{id}', [TheSectionController::class, 'sectionDelete']);
 
     });
 
@@ -144,6 +148,17 @@ Route::middleware(['checkLogin'])->group(function () {
     });
 
 
+
+    Route::middleware(['checkIfStudent'])->group(function () {
+        //department
+        Route::get('/enrollment/create', [EnrollmentController::class, 'create']);
+        Route::get('/my-courses', [EnrollmentController::class, 'myCourses']);
+        Route::get('/enrollment/create/course', [EnrollmentController::class, 'enrollCourse']);
+        Route::get('/enrollment/create/course/{id}', [EnrollmentController::class, 'store']);
+
+        Route::get('/enrollment/drop/course/{id}', [EnrollmentController::class, 'delete']);
+
+    });
 
 
 

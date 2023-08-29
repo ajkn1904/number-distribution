@@ -197,6 +197,30 @@
                         @endif
 
 
+
+                        <!-- for Student -->
+                        @if(Session::has('user_role') && Session::get('user_role')=='Student')
+                        <!-- department -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseDepartments" aria-expanded="false"
+                            aria-controls="pagesCollapseDepartments">
+                            Enrollment
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseDepartments" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+                                <a class="nav-link" href="{{url('/enrollment/create')}}">Enroll</a>
+                                <a class="nav-link" href="{{url('/my-courses')}}">My Courses</a>
+
+                            </nav>
+                        </div>
+
+                        @endif
+
+
+
                         <!--  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#pagesCollapseUserWisePages" aria-expanded="false"
                             aria-controls="pagesCollapseUserWisePages">

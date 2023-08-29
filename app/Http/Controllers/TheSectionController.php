@@ -109,4 +109,13 @@ class TheSectionController extends Controller
             return redirect('/section/all-section');
         }
     }
+
+
+    //delete 
+    public function  sectionDelete($id)
+    {
+        if(TheSection::find($id) -> delete()) {
+            return redirect('/section/all-section');
+        }
+    }
 }
