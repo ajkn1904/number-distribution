@@ -5,15 +5,10 @@
 	<ol class="breadcrumb mb-4">
 		<li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
 		<li class="breadcrumb-item"><a href="{{url()->previous()}}">Courses</a></li>
-		<li class="breadcrumb-item active">Distribute Marks</li>
+		<li class="breadcrumb-item active">Redistribute Marks</li>
 	</ol>
-	<h3>Corse Name: <span class="text-info">{{$courses ->name}}</span></h3>
-	<h3>Corse Code: <span class="text-info">{{$courses ->course_code}}</span></h3>
-	<h3>Corse Type: <span class="text-info">{{$courses ->type}}</span></h3>
-	<h3>Section : <span class="text-info">{{$courses ->section}}</span></h3>
 
-	<h1 class="mt-4">Distribute Marks out of 100</h1>
-
+	<h1>Edit Mark Distribution</h1>
 	@if(Session::has('success'))
 	<div class="alert alert-success">
 
@@ -33,19 +28,19 @@
 	@endif
 
 
-	<form action="{{ url('/teacher/my-courses/distribute/store/'.$courses->id) }}" method="post">
+	<form action="{{ url('/teacher/my-courses/update/'.$marks->section_id) }}" method="post">
 		@csrf
 		<div class="row mt-2">
 			<div class="col">
 				<div class="form-group">
 					<label for="">Class test 1</label>
-					<input value="" type="text" name="ct1" class="form-control">
+					<input value="{{$marks->class_test_one}}" type="text" name="ct1" class="form-control">
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
 					<label for="">Class test 2</label>
-					<input value="" type="text" name="ct2" class="form-control">
+					<input value="{{$marks->class_test_two}}" type="text" name="ct2" class="form-control">
 				</div>
 			</div>
 		</div>
@@ -54,13 +49,13 @@
 			<div class="col">
 				<div class="form-group">
 					<label for="">Assignment/Performance</label>
-					<input value="" type="text" name="assessment" class="form-control">
+					<input value="{{$marks->assessment}}" type="text" name="assessment" class="form-control">
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
 					<label for="">Attendance</label>
-					<input value="" type="text" name="attendance" class="form-control">
+					<input value="{{$marks->attendance}}" type="text" name="attendance" class="form-control">
 				</div>
 			</div>
 		</div>
@@ -69,13 +64,13 @@
 			<div class="col">
 				<div class="form-group">
 					<label for="">Mid Term</label>
-					<input value="" type="text" name="mid" class="form-control">
+					<input value="{{$marks->mid_term}}" type="text" name="mid" class="form-control">
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
 					<label for="">Final</label>
-					<input value="" type="text" name="final_exam" class="form-control">
+					<input value="{{$marks->final_exam}}" type="text" name="final" class="form-control">
 				</div>
 			</div>
 		</div>
@@ -84,7 +79,7 @@
 
 		<div class="form-group my-2">
 			<button type="submit" class="btn btn-primary mx-3">Save</button>
-			<a href="{{url()->previous()}}" class="btn btn-secondary">Back</a>
+			<a href="{{url()->previous()}}" class="btn btn-primary">Back</a>
 
 		</div>
 

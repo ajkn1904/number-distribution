@@ -72,6 +72,5 @@ class Kernel extends HttpKernel
         'checkIfAdmin'=>\App\Http\Middleware\IsAdmin::class,
         'checkIfTeacher'=>\App\Http\Middleware\IsTeacher::class,
         'checkIfStudent'=>\App\Http\Middleware\IsStudent::class,
-        'checkIfSuperAdminOrAdmin'=>\App\Http\Middleware\IsSuperAdminOrAdmin::class,
     ];
 }

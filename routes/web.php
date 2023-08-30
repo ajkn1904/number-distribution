@@ -8,6 +8,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentSessionController;
 use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\TeachersPanelController;
 use App\Http\Controllers\TheSectionController;
 
 /*
@@ -53,12 +54,7 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('/logout', [AuthController::class,'logout']);
     //Route::get('/pending-users', [UserController::class, 'pendingUsers']);
 
-
-    Route::middleware(['checkIfSuperAdminOrAdmin'])->group(function () {
-
-    });
-
-
+    //for admin
     Route::middleware(['checkIfAdmin'])->group(function () {
         //teacher
         Route::get('/teacher/department-create', [AuthController::class, 'createDepartmentTeacher']);
@@ -72,7 +68,6 @@ Route::middleware(['checkLogin'])->group(function () {
         Route::get('/student/department-create', [AuthController::class, 'createDepartmentStudent']);
         Route::post('/student/department-creation', [AuthController::class, 'studentDepartmentCreate']);
         Route::get('/student/all-department-students', [UserController::class, 'allDepartmentStudents']);
-
 
         //course
         Route::get('/courses/create', [CourseController::class, 'createCourses']);
@@ -100,8 +95,6 @@ Route::middleware(['checkLogin'])->group(function () {
         //delete session
         Route::get('/session/delete/{id}', [DepartmentSessionController::class, 'sessionDelete']);
 
-
-
         //section
         Route::get('/section/create', [TheSectionController::class, 'createSection']);
         Route::post('/section/creation', [TheSectionController::class, 'sectionCreate']);
@@ -111,18 +104,17 @@ Route::middleware(['checkLogin'])->group(function () {
         Route::get('/section/assign/{id}', [TheSectionController::class, 'assignTeacher']);
         Route::post('/section/update/{id}', [TheSectionController::class, 'courseTeacher']);
 
-
         //delete section
         Route::get('/section/delete/{id}', [TheSectionController::class, 'sectionDelete']);
 
     });
 
 
-    Route::middleware(['checkIfSuperAdmin'])->group(function () {
 
+    // for super admin
+    Route::middleware(['checkIfSuperAdmin'])->group(function () {
         Route::get('/pending-users', [UserController::class, 'pendingUsers']);
         Route::get('/approve-user/{userid}', [UserController::class, 'approveUser']);
-
 
         //department
         Route::get('/department/create', [DepartmentController::class, 'create']);
@@ -139,8 +131,6 @@ Route::middleware(['checkLogin'])->group(function () {
 
         Route::get('/make-admin/{userid}', [UserController::class, 'makeAdmin']);
 
-
-
         //student
         Route::get('/student/create', [AuthController::class, 'createStudent']);
         Route::post('/student/creation', [AuthController::class, 'studentCreate']);
@@ -149,17 +139,42 @@ Route::middleware(['checkLogin'])->group(function () {
 
 
 
+    //for student
     Route::middleware(['checkIfStudent'])->group(function () {
-        //department
         Route::get('/enrollment/create', [EnrollmentController::class, 'create']);
-        Route::get('/my-courses', [EnrollmentController::class, 'myCourses']);
+        Route::get('/enrollment/my-courses', [EnrollmentController::class, 'myCourses']);
         Route::get('/enrollment/create/course', [EnrollmentController::class, 'enrollCourse']);
-        Route::get('/enrollment/create/course/{id}', [EnrollmentController::class, 'store']);
 
+        Route::get('/enrollment/create/course/{id}', [EnrollmentController::class, 'store']);
         Route::get('/enrollment/drop/course/{id}', [EnrollmentController::class, 'delete']);
 
     });
 
 
 
+
+    //for teacher
+    Route::middleware(['checkIfTeacher'])->group(function () {
+        Route::get('/teacher/my-courses', [TeachersPanelController::class, 'myCourses']);
+        Route::get('/teacher/my-courses/show', [TeachersPanelController::class, 'show']);
+
+        Route::get('/teacher/my-courses/distribute/{id}', [TeachersPanelController::class, 'distribute']);
+
+        //create mark distribution
+        Route::post('/teacher/my-courses/distribute/store/{id}', [TeachersPanelController::class, 'storeMarks']);
+
+        //update mark distribution
+        Route::get('/teacher/my-courses/edit/{id}', [TeachersPanelController::class, 'edit']);
+        Route::post('/teacher/my-courses/update/{id}', [TeachersPanelController::class, 'update']);
+        
+        //show distribution
+        Route::get('/teacher/my-courses/show/{id}', [TeachersPanelController::class, 'showDistribution']);
+        
+        //marks allocation
+        Route::get('/teacher/my-courses/allocate/{id}', [TeachersPanelController::class, 'marksAllocation']);
+        
+        Route::get('/teacher/my-courses/allocate/store/{id}', [TeachersPanelController::class, 'storeStudentsMarks']);
+        
+
+    });
 });

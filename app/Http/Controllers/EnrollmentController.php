@@ -31,6 +31,7 @@ class EnrollmentController extends Controller
 
     public function enrollCourse(Request $req)
     {
+
         if($req->section && $req->session_id) {
             $email = Session::get('user_email');
             $sectionData = TheSection::where('section', '=', $req->section)->where('session_id', '=', $req->session_id)->get();
@@ -42,14 +43,17 @@ class EnrollmentController extends Controller
             $courses = Courses::whereIn('id', $courseIds)->get();
             $section = $req->section;
             $sessionId = $req->session_id;
-            //dd($courses);
-
+            //dd($section);
             $session = DepartmentSession::where('id', '=', $sessionId)->get();
             //dd($section);
 
-            $enrolled = Enrollment::where('status','=', 1)->get();
+            $enrolled = Enrollment::where('status', '=', 1)->get();
 
-            return view('Student.pages.courses', compact('courses', 'section', 'session', 'sectionData', 'enrolled', 'email'));
+            $enrolledCourses = DB::table('enrollments')->join('department_sessions', 'department_sessions.id', 'enrollments.session_id')->select('enrollments.*', 'department_sessions.*')->get();
+            //dd($enrolledCourses);
+
+
+            return view('Student.pages.courses', compact('courses', 'section', 'session', 'sectionData', 'enrolledCourses', 'email'));
         } else {
             return redirect()->back()->with('error', 'Data missing!');
         }
@@ -57,6 +61,7 @@ class EnrollmentController extends Controller
 
     public function store($id)
     {
+        dd($id);
         $email = Session::get('user_email');
 
         $courseData =  TheSection::where('id', '=', $id)->first();
@@ -70,6 +75,7 @@ class EnrollmentController extends Controller
             $obj = new Enrollment();
             $obj->email = $email;
             $obj->section = $courseData->section;
+            $obj->section_id = $id;
             $obj->session_id = $courseData->session_id;
             $obj->course_id = $courseData->course_id;
             $obj->status = true;
@@ -81,7 +87,8 @@ class EnrollmentController extends Controller
 
 
 
-    public function getSections($id){
+    public function getSections($id)
+    {
         $sections = DB::table('the_sections')->where('session_id', '=', $id)->get();
         return response()->json([
             'sections' => $sections
@@ -90,7 +97,8 @@ class EnrollmentController extends Controller
 
 
 
-    public function delete($id){
+    public function delete($id)
+    {
         $email = Session::get('user_email');
         $data = TheSection::where('id', '=', $id)->first();
         $sectionName = $data->section;
@@ -100,20 +108,18 @@ class EnrollmentController extends Controller
         }
     }
 
-    public function myCourses(){
+    public function myCourses()
+    {
         $email = Session::get('user_email');
         $enrolled = Enrollment::where('email', '=', $email)->get();
+        //dd($enrolled);
 
-        $courses = DB::table('enrollments')->join('courses', 'courses.id', 'enrollments.course_id')->select('enrollments.*', 'courses.*')->get();
-        
-        $sessionIds = $enrolled->pluck('session_id'); 
-        $session = DepartmentSession::whereIn('id', $sessionIds)->first();
-        //dd($session);
-        
-        return view('Student.pages.my_courses', compact('courses', 'session'));
+        $courses = DB::table('enrollments')->join('courses', 'courses.id', 'enrollments.course_id')->join('the_sections', 'enrollments.section_id', '=', 'the_sections.id')->join('department_sessions', 'enrollments.session_id', '=', 'department_sessions.id')->select('enrollments.*', 'courses.*', 'department_sessions.name')->where('enrollments.email', '=', $email)->get();
+        //dd($courses);
+
+        return view('Student.pages.my_courses', compact('courses'));
     }
 
+    
+
 }
-
-
-

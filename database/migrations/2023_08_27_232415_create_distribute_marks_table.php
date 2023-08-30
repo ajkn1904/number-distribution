@@ -11,21 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('distribute_marks', function (Blueprint $table) {
+          
             $table->id();
-            $table->string('email', 50);
-            $table->string('section');
+            $table->string('class_test_one', 20);
+            $table->string('class_test_two', 20);
+            $table->string('mid_term', 20);
+            $table->string('assessment', 20);
+            $table->string('attendance', 20);
             
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('the_sections');
+            $table->string('final_exam', 20);
             
-            $table->unsignedBigInteger('session_id');
-            $table->foreign('session_id')->references('id')->on('department_sessions');
-
-
-            $table->unsignedBigInteger('course_id')->nullable();
-            $table->foreign('course_id')->references('id')->on('courses');
-
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('distribute_marks');
     }
 };

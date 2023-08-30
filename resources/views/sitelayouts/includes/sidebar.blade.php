@@ -200,24 +200,50 @@
 
                         <!-- for Student -->
                         @if(Session::has('user_role') && Session::get('user_role')=='Student')
-                        <!-- department -->
+                        <!-- Enrollment -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#pagesCollapseDepartments" aria-expanded="false"
-                            aria-controls="pagesCollapseDepartments">
+                            data-bs-target="#pagesCollapseEnrollmentAnnCourses" aria-expanded="false"
+                            aria-controls="pagesCollapseEnrollmentAnnCourses">
                             Enrollment
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="pagesCollapseDepartments" aria-labelledby="headingOne"
+                        <div class="collapse" id="pagesCollapseEnrollmentAnnCourses" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordionPages">
                             <nav class="sb-sidenav-menu-nested nav">
 
                                 <a class="nav-link" href="{{url('/enrollment/create')}}">Enroll</a>
-                                <a class="nav-link" href="{{url('/my-courses')}}">My Courses</a>
+                                <a class="nav-link" href="{{url('/enrollment/my-courses')}}">My Courses</a>
 
                             </nav>
                         </div>
 
                         @endif
+
+
+
+                         <!-- for teacher -->
+                         @if(Session::has('user_role') && Session::get('user_role')=='Teacher')
+                        <!-- Courses -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pagesCollapseTeachersPages" aria-expanded="false"
+                            aria-controls="pagesCollapseTeachersPages">
+                            Courses
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseTeachersPages" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+                                <a class="nav-link" href="{{url('/teacher/my-courses')}}">Courses</a>
+                                <a class="nav-link" href="{{url('')}}">Distribute Marks</a>
+
+                            </nav>
+                        </div>
+
+
+                        @endif
+
+
 
 
 
