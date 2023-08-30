@@ -61,7 +61,7 @@ Route::middleware(['checkLogin'])->group(function () {
         Route::post('/teacher/department-creation', [AuthController::class, 'teacherDepartmentCreate']);
 
         Route::get('/teacher/all-department-teachers', [UserController::class, 'allDepartmentTeacher']);
-
+        Route::get('/teacher/make-admin/{userid}', [UserController::class, 'makeAdmin']);
 
 
         //student
@@ -147,6 +147,8 @@ Route::middleware(['checkLogin'])->group(function () {
 
         Route::get('/enrollment/create/course/{id}', [EnrollmentController::class, 'store']);
         Route::get('/enrollment/drop/course/{id}', [EnrollmentController::class, 'delete']);
+        
+        Route::get('/enrollment/my-courses/view/{id}', [EnrollmentController::class, 'viewMarks']);
 
     });
 

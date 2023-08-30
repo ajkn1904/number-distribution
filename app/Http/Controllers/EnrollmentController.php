@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AllocateMarks;
 use App\Models\Courses;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -120,6 +121,15 @@ class EnrollmentController extends Controller
         return view('Student.pages.my_courses', compact('courses'));
     }
 
-    
+    public function viewMarks($id)
+    {
+        $userEmail = Session::get('user_email');
+        $user = User::where('email', '=', $userEmail)->first();
+        //dd($user);
+        $marks = DB::table('allocate_marks')->join('courses', 'courses.id', 'allocate_marks.course_id')->select('allocate_marks.*', 'courses.*')->where('allocate_marks.user_id', '=', $user->id)->where('allocate_marks.section_id', '=', $id)->first();
+        
+        //dd($marks);
+        return view('Student.pages.view_marks', compact('marks'));
+    }
 
 }

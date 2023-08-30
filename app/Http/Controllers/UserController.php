@@ -56,7 +56,7 @@ class UserController extends Controller
         $user = User::where('email', '=', $userEmail)->first();
         $userDep = $user->department;
         //dd($userDep);
-        $sameDepartmentTeachers = User::where('department', '=', $userDep)->where('role', '=', 'Teacher')->get();
+        $sameDepartmentTeachers = User::where('department', '=', $userDep)->where('role', '=', 'Teacher')->orWhere('role', '=', 'Admin')->where('department', '=', $userDep)->get();
          //dd($students);
          
         //$teachers = User::where('role', '=', 'Teacher')->orWhere('role', '=', 'Admin')->get();

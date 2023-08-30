@@ -71,7 +71,7 @@
 
 							<td>
 								<a class="btn btn-sm btn-primary"
-									href="{{ url('/enrollment/my-courses/view/'.$c->id) }}">View Marks</a>
+									href="{{ url('/enrollment/my-courses/view/'.$c->section_id) }}">View Marks</a>
 							</td>
 
 
